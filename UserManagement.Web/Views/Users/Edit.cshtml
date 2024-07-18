@@ -1,0 +1,61 @@
+﻿@model UserManagement.Web.Models.Users.UserListViewModel
+
+
+<div class="form-group">
+    @foreach (var item in Model.Items)
+    {
+        <form asp-controller="Users" asp-action="Edit" method="post">
+            <div class="form-group mb-2">
+                <label>ID:</label>
+                <input value="@item.Id" id="id" readonly name="Id"/>
+            </div>
+
+            <div class="form-group mb-2">
+                <label>First Name:</label>
+                <input required value="@item.Forename" id="forename" name="Forename" />
+            </div>
+
+            <div class="form-group mb-2">
+                <label>Surname:</label>
+                <input required value="@item.Surname" id="surname" name="Surname" />
+            </div>
+
+            <div class="form-group mb-2">
+                <label>Email:</label>
+                <input required value="@item.Email" id="email" name="Email" />
+            </div>
+
+            <div class="form-group mb-2">
+                <label>Date Of Birth:</label>
+                <input value="@item.DateOfBirth.ToString("yyyy-MM-dd")" type="date" id="dateOfBirth" name="DateOfBirth" />
+            </div>
+
+            <div class="form-group mb-2">
+                <label for="active">Is Active:</label>
+                <input type="checkbox" id="active" name="Active" @(item.IsActive ? "checked" : "") />
+            </div>
+
+
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editModal">
+                Edit
+            </button>
+
+            <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="editModalLabel">Are you sure?</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-primary">
+                                Save Changes
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    }
+</div>
